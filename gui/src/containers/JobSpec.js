@@ -5,6 +5,7 @@ import PaddedCard from 'components/PaddedCard'
 import PrettyJson from 'components/PrettyJson'
 import Breadcrumb from 'components/Breadcrumb'
 import BreadcrumbItem from 'components/BreadcrumbItem'
+import JobRunsList from 'components/JobRunsList'
 import formatInitiators from 'utils/formatInitiators'
 import jobSpecDefinition from 'utils/jobSpecDefinition'
 import { withStyles } from '@material-ui/core/styles'
@@ -21,6 +22,10 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3
   },
   breadcrumb: {
+    marginTop: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 5
+  },
+  lastRun: {
     marginTop: theme.spacing.unit * 5,
     marginBottom: theme.spacing.unit * 5
   }
@@ -63,6 +68,16 @@ const renderJobSpec = ({classes, jobSpec}) => (
   </Grid>
 )
 
+const renderLatestRuns = ({classes}) => (
+  <React.Fragment>
+    <Typography variant='title' className={classes.lastRun}>
+      Last Run
+    </Typography>
+
+    <JobRunsList runs={[]} />
+  </React.Fragment>
+)
+
 const renderFetching = () => (
   <div>Fetching...</div>
 )
@@ -94,6 +109,7 @@ export class JobSpec extends Component {
         </Typography>
 
         {renderDetails(this.props)}
+        {renderLatestRuns(this.props)}
       </div>
     )
   }
